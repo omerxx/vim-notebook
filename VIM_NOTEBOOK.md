@@ -270,3 +270,23 @@ Now I can `<C-w> z` anywhere. (Revert the split to be even with `<C-w> =`)
 
 ---
 
+#### The meaning of life:
+```
+:help 42
+```
+
+---
+
+#### Utilize search and replace
+Putting aside the `:%s/<text>/<replace text>/g` option and its interactive version `:%s/<text>/<replace text>/gc`, you can use the `gn` tool for quick find and replace:
+1. Search for your pattern e.g `/const`
+2. Use `cgn` which basically edits the next match `cg` and them jumps to the next one `n`
+3. Then you can simply use `.` to repeat the last command on as many matches you want.
+
+http://vimcasts.org/episodes/operating-on-search-matches-using-gn/
+https://medium.com/@schtoeffel/you-don-t-need-more-than-one-cursor-in-vim-2c44117d51db
+
+---
+
+
+
