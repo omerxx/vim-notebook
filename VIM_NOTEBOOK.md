@@ -1,8 +1,5 @@
 # A VIM Notebook
-Theory, tips, and tricks after reading Drew Neil's Practical VIM
-
-Tips and tricks
-An unordered list of tips picked up along the way
+Theory, tips, and tricks after reading Drew Neil's Practical VIM & An unordered list of tips picked up along the way
 
 ---
 #### Beginners: if you need to force yourself to stop using the arrow keys:
