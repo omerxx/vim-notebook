@@ -228,4 +228,45 @@ Kill the session with CTRL-W CTRL-C
 
 ---
 
+#### Solving merge conflicts with vim fugitive(!):
+When in a merge conflict try `:Gdiff` (or `:Gvdiff` to open vertically)
+You’ll get a 3-way split panes, the middle one is the working file and on the sides the two options: HEAD or target branch, which can be referred to by buffer names `//2` and `//3` (`:ls` will show all buffer full names).
+
+You now have two options:
+1. When standing in the working copy you can `diffget <buffer name/number>`
+2. Go to other pane and `diffput <buffer name/number>`
+
+I mapped the process to ease the flow like that:
+```
+" Open a vertical diff
+nnoremap <leader>gd :Gvdiff<CR>
+" Get the left pane changes
+nnoremap gdh :diffget //2<CR>
+" Get the right pane changes
+nnoremap gdl :diffget //3<CR>
+" Stage the changes (will automatically close all buffers leaving you in the center)
+nnoremap <leader>gw :Gwrite<CR>
+```
+
+Another useful shortcut is to jump to the next hunk of changes with `[c` or `]c`
+Really nice and visible way to solve conflicts!
+
+[I've turned this into a blog post](https://medium.com/prodopsio/solving-git-merge-conflicts-with-vim-c8a8617e3633)
+
+---
+
+#### Zooming into split panes
+Natively you can enlarge a pane by `<C-w> _` for horizontal and `<C-w> |` for vertical ones.
+I added a script that uses these like Tmux’s zoom-in feature:
+```
+" Pane Zoom
+func! PaneZoom()
+  res 100
+  vert res 1000
+endfunc
+nnoremap <C-w>z :call PaneZoom()<CR>
+```
+Now I can `<C-w> z` anywhere. (Revert the split to be even with `<C-w> =`)
+
+---
 
