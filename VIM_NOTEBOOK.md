@@ -288,5 +288,150 @@ https://medium.com/@schtoeffel/you-don-t-need-more-than-one-cursor-in-vim-2c4411
 
 ---
 
+#### Movement and surrounding
+`w` jumps one word, if you have `svc.cluster.local` these are 3 words. But if you use `W` vim will address word as the characters between 2 spaces, so that `svc.cluster.local` becomes one. Why is it useful? First - better movement around VIM, another example is trying to wrap with parentheses for example, where I can use `ysiW` (using *tpope/vim-surround*) to include exactly what I want
 
+---
+
+#### Save all buffers (and panes):
+```
+:wa
+```
+
+---
+
+#### Search code in a project!
+Using `fzf` you can `:Ag` to search for any string which immediately shows up results.
+BUT better yet, you can send the word under the cursor to it and populate results to a preview pane
+
+---
+
+#### Utilizing Ag the silver searcher
+https://github.com/ggreer/the_silver_searcher
+
+This is the mapping that sends the result to `ag` with preview:
+```
+nnoremap <leader>F
+  \ :call fzf#vim#ag('', fzf#vim#with_preview({'options': ['--query', expand('<cword>')]}))<cr>
+```
+
+---
+
+#### Tabs with sessions
+
+1. Open any number of tabs you wish to work with
+2. Type `:mksession` header-files-work.vim and hit enter
+3. Your current session of open tabs will be stored in a file header-files-work.vim
+4. Close all tabs and Vim
+5. Either start vim with your session using : `vim -S header-files-work.vim` or open vim with any other file and enter command mode to type: `:source header-files-work.vim` and *BOOM!*
+
+---
+
+#### Save As
+
+If you work on a file and would like to save it with a new name (like *save as*) you can:
+1. `:w <NAME>` would write an external file and let you keep working on the original one
+2. `:sav <NAME>` would write an external file and change your current buffer to the new one as well (a more likely scenario)
+
+---
+
+#### Folding
+
+Sometimes it’s visibly comfortable to fold pieces of code.
+`z` is the controller here, when combined with `f` it folds the motion added to it (`zf'm` will fold until the marker “m”).
+Most intuitive way is to have a visual block marked and just `zf` to fold.
+`za` toggles the created fold on and off.
+`zd` deletes a fold.
+
+These can be applied automatically with other modes of folding: `:setlocal foldmethod=indent` for example will create basic folding under indentation levels of code.
+More helpful docs: https://vim.fandom.com/wiki/Folding
+
+```
+zf#j creates a fold from the cursor down # lines.
+zf/ string creates a fold from the cursor to string .
+zj moves the cursor to the next fold.
+zk moves the cursor to the previous fold.
+za toggle a fold at the cursor.
+zo opens a fold at the cursor.
+zO opens all folds at the cursor.
+zc closes a fold under cursor.
+zm increases the foldlevel by one.
+zM closes all open folds.
+zr decreases the foldlevel by one.
+zR decreases the foldlevel to zero -- all folds will be open.
+zd deletes the fold at the cursor.
+zE deletes all folds.
+[z move to start of open fold.
+]z move to end of open fold.
+```
+
+---
+
+#### Vim marks
+
+An awesome way to jump between sections when editing a file (https://vim.fandom.com/wiki/Using_marks):
+1. `ma` marks a line as `a` (or any other letter)
+2. Jump to the mark with `'a`
+3. TIP: `'` is always a marker of your previous location, so by `''` you can always jump back (kinda like `cd -` in bash)
+
+I looked for a way to see these markers visible (when you have more than 2-3 its hard to remember them), so [there’s a nice plugin](https://github.com/kshenoy/vim-signature)
+
+---
+
+#### Join two lines
+
+If you have a line broken to many parts or just want to join two lines into 1 try Shift + `j`
+
+---
+
+#### Small surrounding Tip
+
+In [vim surround](https://github.com/tpope/vim-surround) when you wrap with `{` or `[` you always get an unwanted space (e.g `{ $var }`) to lose the spaces, use the closing brace (`}`)
+
+---
+
+#### Spanning Vim splits
+
+You can send a vim split to span full screen with `J`:
+If you have two splits side by side, and you open another one it stays on the focused side when creating it. To make it span both original splits on the bottom: `<CR-W>J`
+
+---
+
+#### Syntax refresh when Vim messes it up
+
+Refresh syntax highlight when it gets messed up in long files : `:syntax sync fromstart`
+
+---
+
+#### Open your current file (e.g. in the brwoser)
+
+```
+:!open %
+```
+ so if you’re editing an html file for example it goes straight to the browser
+
+---
+
+#### Lowercasing
+
+If you visually mark a text and press `u` it turns the text to lowercase completely.
+
+---
+
+#### Remove last search result highlighting
+Probably not that exciting, but stopping a highlight of a current search, I used to search for a non existing string until today like `/sss` which is dumb..
+I just added a map of `nnoremap ss :noh<CR>` which for me `ss` is something I was used to do and also an abbreviation of “stop search”
+
+---
+
+#### Spelling
+Vim has an internal spell check (`:help spell`).
+1. Set it with `:setlocal spell spelllang=en_us`
+2. Run through the marked bad words with `[s` / `]s`
+3. Use `zg` to mark a word as “good” (“add to dictionary”)
+4. `zw` will mark an untagged word as “bad”
+
+Some more options like file-local words for spelling, undo options etc can be found in the help section.
+
+---
 
