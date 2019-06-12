@@ -401,7 +401,7 @@ Refresh syntax highlight when it gets messed up in long files : `:syntax sync fr
 
 ---
 
-#### Open your current file (e.g. in the brwoser)
+#### Open your current file (e.g. in the browser)
 
 ```
 :!open %
