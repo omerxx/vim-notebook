@@ -14,8 +14,9 @@ nnoremap <Down> :echo "Use j"<CR>
 
 #### Global yanking with the OS clipboard:
 ```
-set clipboard=unnamed on .vimrc for
+set clipboard=unnamed
 ```
+Added to .vimrc will make Vim yank to the clipboard, to be pasted anywhere.
 
 ---
 
