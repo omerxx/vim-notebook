@@ -99,12 +99,6 @@ If you want to remove text whether using `x`/`s`/`c`/`d` use `"_` before
 
 ---
 
-#### Using markers and last location
-Using `m` is a cool feature if you want to mark a specific location in a file and go back, e.g: `ma` and then after moving around using `'m` will throw you back.
-But if you didn't mark anything and just want to jump back to where you've been last, use `''`
-
----
-
 #### Incrementing
 Incrementing numbers in vim: `Ctrl-a`
 Decrementing numbers in vim: `Ctrl-x`
@@ -401,10 +395,11 @@ Refresh syntax highlight when it gets messed up in long files : `:syntax sync fr
 
 ---
 
-#### Open your current file (e.g. in the brwoser)
+#### Open your current file (e.g. in the browser)
 
 ```
-:!open %
+:!open % (macOS)
+:!xdg-open % (Linux)
 ```
  so if you’re editing an html file for example it goes straight to the browser
 
