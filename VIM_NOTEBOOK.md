@@ -433,3 +433,18 @@ Some more options like file-local words for spelling, undo options etc can be fo
 
 ---
 
+#### Insert mode quick editting
+If you’re in insert mode and want to use a normal mode command without completely changing mode,
+you can `Ctrl + o` which lets you send a single normal command without leaving.
+
+Consider this:
+I’m in insert mode and want to delete a word,
+Option 1:
+`esc` + `dw` + `i`
+Option 2:
+`Ctrl + o` + `dw`
+
+30% less strokes :sl
+
+---
+
