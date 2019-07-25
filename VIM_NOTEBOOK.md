@@ -443,3 +443,16 @@ Option 2:
 
 ---
 
+### Working with [YouCompleteMe](https://github.com/ycm-core/YouCompleteMe#goto-commands) like a boss
+If you use [YouCompleteMe](https://github.com/ycm-core/YouCompleteMe#goto-commands) plugin  it has plenty of extra features for different languages.
+So now when I use TypeScript I can `./install.py --ts-completer` and beyond the completion there are hidden gems like GoTo definition or references, smart refactoring, organizing imports etc etc, here’s a short list of mappings I added:
+nmap <leader>ygr :YcmCompleter GoToReferences<CR>
+nmap <leader>ygt :YcmCompleter GoToType<CR>
+nmap <leader>yGt :YcmCompleter GetType<CR>
+nmap <leader>yGd :YcmCompleter GetDoc<CR>
+nmap <leader>yfi :YcmCompleter FixIt<CR>
+nmap <leader>yr :YcmCompleter RefactorRename<SPACE><C-R><C-W>
+nmap <leader>yfm :YcmCompleter Format<CR>
+nmap <leader>yo :YcmCompleter OrganizeImports<CR>
+Docs are here: https://github.com/ycm-core/YouCompleteMe#goto-commands (edited)
+
