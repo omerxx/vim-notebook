@@ -456,3 +456,13 @@ nmap <leader>yfm :YcmCompleter Format<CR>
 nmap <leader>yo :YcmCompleter OrganizeImports<CR>
 Docs are here: https://github.com/ycm-core/YouCompleteMe#goto-commands (edited)
 
+---
+
+### Getting to a specific charcter in a line
+Use `|` preceeded with a number of a charter you wish to find.
+Usefull when debugging and the debugger notifies of an error on line x and on char y, you can then use `:<x>` followed by `<y>|`.
+A numerical example: "An error was found on line 12 character 3":
+```
+:12
+3|
+```
