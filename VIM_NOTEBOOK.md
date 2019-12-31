@@ -466,3 +466,11 @@ A numerical example: "An error was found on line 12 character 3":
 :12
 3|
 ```
+
+---
+
+### Working with registers
+`:reg` shows the current state of all registes and what is stored in them.
+The numbered ones are a kind of a clipboard history showing the last 10 yanked / cut objects.
+
+---
