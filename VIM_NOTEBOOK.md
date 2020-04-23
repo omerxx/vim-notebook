@@ -474,3 +474,46 @@ A numerical example: "An error was found on line 12 character 3":
 The numbered ones are a kind of a clipboard history showing the last 10 yanked / cut objects.
 
 ---
+
+### Simple re-format for minified Javascript
+command! UnMinify call UnMinify()
+function! UnMinify()
+    %s/{\ze[^\r\n]/{\r/g
+    %s/){/) {/g
+    %s/};\?\ze[^\r\n]/\0\r/g
+    %s/;\ze[^\r\n]/;\r/g
+    %s/[^\s]\zs[=&|]\+\ze[^\s]/ \0 /g
+    normal ggVG=
+endfunction
+
+---
+
+### Widescreen - bring code to 2/3 screen towards the middle
+I found myself fighting a lot with vim windows when working on widescreens - I use vim on my left screen and the code naturally starts at the edge. I wanted a shortcut to “bring” the code closer to my eyes (that is - the right edge where my eyes rest). So I wrote this small function:
+```vim
+function! ComeCloser()
+  :vnew<CR>
+  :vertical resize 50
+  :wincmd l
+endfunc
+nnoremap <C-w>x :call ComeCloser()<CR>
+```
+
+---
+
+### Sessions
+`:mks` will save your current session with all open tabs, for example I’m working on company.com project:
+`:mks` company.vim
+And next time I want to reopen the same state:
+`vim -S mdi.vim`
+[another tip: closing all tabs at once: `:qa`]
+
+---
+
+### Copy function below
+Useful for duplicating a function for a similar structure and saves a few strokes
+```vim
+nmap <leader>yyb V}y}p<CR>
+```
+
+---
