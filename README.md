@@ -3,7 +3,7 @@ Theory, tips, and tricks after reading Drew Neil's Practical VIM & An unordered 
 
 ---
 #### Beginners: if you need to force yourself to stop using the arrow keys:
-```
+```vim
 nnoremap <Left> :echo "Use h"<CR>
 nnoremap <Right> :echo "Use l"<CR>
 nnoremap <Up> :echo "Use k"<CR>
@@ -13,7 +13,7 @@ nnoremap <Down> :echo "Use j"<CR>
 ---
 
 #### Global yanking with the OS clipboard:
-```
+```vim
 set clipboard=unnamed
 ```
 Added to .vimrc will make Vim yank to the clipboard, to be pasted anywhere.
@@ -39,7 +39,7 @@ the best way to add a prefix to lines. adding a suffix also works if after `ctrl
 
 #### Searching
 Vim uses `*` to search the current word on normal mode, but when using visual mode you'd expect it would search your highlighted text, but it doesn't, fix it!
-```
+```vim
 " Operating on a complete search match
 xnoremap * :<C-u>call <SID>VSetSearch()<CR>/<C-R>=@/<CR><CR>
 xnoremap # :<C-u>call <SID>VSetSearch()<CR>?<C-R>=@/<CR><CR>
@@ -75,7 +75,7 @@ If you want to vim-search it just use `/` and search
 
 #### Better VIM scroll 
 (inspired by DAS talks about moving in large chunks, I added the scroll feel):
-```
+```vim
 nnoremap <C-j> 10jzz
 nnoremap <C-k> 10kzz
 ```
@@ -117,7 +117,7 @@ Running this combination in a loop can apply the same `<macro-commands>` on a li
 
 #### Going directly to your last opened file and last location of the cursor!
 Open Vim and hit
-```
+```vim
 Ctrl+o+o
 ```
 
@@ -125,7 +125,7 @@ Ctrl+o+o
 
 #### Editing a read only file and forgot to use `sudo`?
 You don't need to leave VIM!
-```
+```vim
 :w !sudo tee %
 ```
 Of course this can be aliased to anything e.g `sudowrite`
@@ -138,7 +138,7 @@ Added this to my .vimrc: `nnoremap DD ""dd` . I find it useful when many times 
 ---
 
 #### See the file name you're working on:
-```
+```vim
 :f
 ```
 
@@ -158,7 +158,7 @@ More at http://vim.wikia.com/wiki/Sort_lines
 ---
 
 #### See your tabs and spaces
-```
+```vim
 :set list
 ```
 Useful for yaml and indentation based structures debugging
@@ -169,7 +169,7 @@ Try `set listchars=tab:..,trail:_,extends:>,precedes:<,nbsp:~` and then insert a
 ---
 
 #### Delete trailing white space on save
-```
+```vim
 func! DeleteTrailingWS()
  exe "normal mz"
  %s/\s\+$//ge
@@ -179,7 +179,7 @@ au BufWrite * silent call DeleteTrailingWS()
 ```
 
 #### Reloading .vimrc while working:
-```
+```vim
 :so %
 ```
 
@@ -192,7 +192,7 @@ You now have two options:
 1. When standing in the working copy you can `diffget <buffer name/number>`
 2. Go to other pane and `diffput <buffer name/number>`
 I mapped the process to ease the flow like that:
-```
+```vim
 " Open a vertical diff
 nnoremap <leader>gd :Gvdiff<CR>
 " Get the left pane changes
@@ -229,7 +229,7 @@ You now have two options:
 2. Go to other pane and `diffput <buffer name/number>`
 
 I mapped the process to ease the flow like that:
-```
+```vim
 " Open a vertical diff
 nnoremap <leader>gd :Gvdiff<CR>
 " Get the left pane changes
@@ -250,7 +250,7 @@ Really nice and visible way to solve conflicts!
 #### Zooming into split panes
 Natively you can enlarge a pane by `<C-w> _` for horizontal and `<C-w> |` for vertical ones.
 I added a script that uses these like Tmux’s zoom-in feature:
-```
+```vim
 " Pane Zoom
 func! PaneZoom()
   res 100
@@ -263,7 +263,7 @@ Now I can `<C-w> z` anywhere. (Revert the split to be even with `<C-w> =`)
 ---
 
 #### The meaning of life:
-```
+```vim
 :help 42
 ```
 
@@ -286,7 +286,7 @@ https://medium.com/@schtoeffel/you-don-t-need-more-than-one-cursor-in-vim-2c4411
 ---
 
 #### Save all buffers (and panes):
-```
+```vim
 :wa
 ```
 
@@ -302,7 +302,7 @@ BUT better yet, you can send the word under the cursor to it and populate result
 https://github.com/ggreer/the_silver_searcher
 
 This is the mapping that sends the result to `ag` with preview:
-```
+```vim
 nnoremap <leader>F
   \ :call fzf#vim#ag('', fzf#vim#with_preview({'options': ['--query', expand('<cword>')]}))<cr>
 ```
@@ -338,7 +338,7 @@ Most intuitive way is to have a visual block marked and just `zf` to fold.
 These can be applied automatically with other modes of folding: `:setlocal foldmethod=indent` for example will create basic folding under indentation levels of code.
 More helpful docs: https://vim.fandom.com/wiki/Folding
 
-```
+```vim
 zf#j creates a fold from the cursor down # lines.
 zf/ string creates a fold from the cursor to string .
 zj moves the cursor to the next fold.
@@ -397,7 +397,7 @@ Refresh syntax highlight when it gets messed up in long files : `:syntax sync fr
 
 #### Open your current file (e.g. in the browser)
 
-```
+```vim
 :!open % (macOS)
 :!xdg-open % (Linux)
 ```
@@ -462,7 +462,7 @@ Docs are here: https://github.com/ycm-core/YouCompleteMe#goto-commands (edited)
 Use `|` preceeded with a number of a charter you wish to find.
 Usefull when debugging and the debugger notifies of an error on line x and on char y, you can then use `:<x>` followed by `<y>|`.
 A numerical example: "An error was found on line 12 character 3":
-```
+```vim
 :12
 3|
 ```
@@ -477,14 +477,16 @@ The numbered ones are a kind of a clipboard history showing the last 10 yanked /
 
 ### Simple re-format for minified Javascript
 command! UnMinify call UnMinify()
+```vim
 function! UnMinify()
-    %s/{\ze[^\r\n]/{\r/g
-    %s/){/) {/g
-    %s/};\?\ze[^\r\n]/\0\r/g
-    %s/;\ze[^\r\n]/;\r/g
-    %s/[^\s]\zs[=&|]\+\ze[^\s]/ \0 /g
-    normal ggVG=
+  %s/{\ze[^\r\n]/{\r/g
+  %s/){/) {/g
+  %s/};\?\ze[^\r\n]/\0\r/g
+  %s/;\ze[^\r\n]/;\r/g
+  %s/[^\s]\zs[=&|]\+\ze[^\s]/ \0 /g
+  normal ggVG=
 endfunction
+```
 
 ---
 
