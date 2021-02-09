@@ -519,3 +519,26 @@ nmap <leader>yyb V}y}p<CR>
 ```
 
 ---
+
+### Sudo write files
+When editting sudo protected files like /etc/hosts, vim wont let you write and you'll have to exit, use sudo for the edit and re-do your work.
+The trick is to pipe the contents of the file write from Vim to `sudo vim`, here's the mapping:
+```
+command Sudow :w !sudo -A tee %
+```
+
+Note! `-A` means the system will use a `SUDO_ASKPASS` utility to determine the password externally.
+The simplest solution is to set a bash script that echos the password upon execution and setting it in the environment:
+
+- Create a file `~/bin/pw.sh`:
+```
+#!/bin/bash
+echo 'mypasswrd'
+```
+
+- Set it in the enviroment (this should be set in your bashrc or any other rc file):
+```
+export SUDO_ASKPASS=~/pw.sh
+```
+
+---
