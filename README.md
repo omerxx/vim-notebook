@@ -543,6 +543,8 @@ export SUDO_ASKPASS=~/pw.sh
 
 ---
 
+### Syntax re-sync
+
 I find Vim8 and Neovim sometimes lose touch with syntax highliting. Mostly this happens on long file or extra long sessions. In order to sync Vim with the syntax I've mapped `syntax sync` command:
 
 ```vim
