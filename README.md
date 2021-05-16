@@ -553,4 +553,12 @@ nnoremap <leader>sr :syntax sync fromstart<CR>
 
 ---
 
+### Refactoring with COC.vim
 
+Using [coc.vim]("https://github.com/neoclide/coc.nvim") is becoming a blessing.
+One awesome faeture is refactoring a variable / function name changing all calls respectively:
+```vim
+nmap <leader>rn <Plug>(coc-rename)
+```
+
+---
