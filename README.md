@@ -562,3 +562,38 @@ nmap <leader>rn <Plug>(coc-rename)
 ```
 
 ---
+
+### Comparing to other branches!
+
+Use Vim fugitive to split a file with it's comparison to a branch:
+```
+# Can be used as Gvsplit for vertical
+:Gsplit <branch>
+```
+
+---
+
+### Golang "if err != nil" automation
+
+Creating a shortcut to product an `if err != nil` block when writing go.
+Below is a function followed by the map (last line):
+```
+function! s:IfErr()
+  let bpos = wordcount()['cursor_bytes']
+  let out = systemlist('iferr -pos ' . bpos, bufnr('%'))
+  if len(out) == 1
+    return
+  endif
+  let pos = getcurpos()
+  call append(pos[1], out)
+  silent normal! j=2j
+  call setpos('.', pos)
+  silent normal! 4j
+endfunction
+
+command! -buffer -nargs=0 IfErr call s:IfErr()
+nnoremap <leader>ie :IfErr<CR>
+```
+Code taken from: https://github.com/koron/iferr/blob/master/vim/ftplugin/go/iferr.vim
+
+---
