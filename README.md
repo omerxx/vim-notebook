@@ -597,3 +597,18 @@ nnoremap <leader>ie :IfErr<CR>
 Code taken from: https://github.com/koron/iferr/blob/master/vim/ftplugin/go/iferr.vim
 
 ---
+
+#### Changing split panes from Vertical to Horizontal (and vice versa)
+
+To change two vertically split windows to horizonally split
+
+```
+Ctrl-w t Ctrl-w K
+```
+
+Horizontally to vertically:
+```
+Ctrl-w t Ctrl-w H
+```
+
+---
